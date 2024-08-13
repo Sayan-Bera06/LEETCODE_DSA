@@ -1,0 +1,32 @@
+class Solution {
+public:
+    string longestCommonPrefix(vector<string>& strs) {
+
+        int n = strs.size();
+        if (n == 0) return "";  // Handle edge case where the input is empty
+
+        int m = strs[0].length();
+
+        string ans = "";
+
+        for (int i = 0; i < m; i++) {
+            char ch = strs[0][i];  // Fix: Use the first string to get the character at position `i`
+
+            int cnt = 0;
+            for (int j = 1; j < n; j++) {
+                // Fix: Compare `ch` with the character at the same position `i` in each string
+                if (i < strs[j].length() && ch == strs[j][i]) {
+                    cnt++;
+                } else {
+                    return ans;  // Return the result if a mismatch is found
+                }
+            }
+
+            if (cnt == n - 1) {  // If all other strings have this character at position `i`
+                ans.push_back(ch);
+            }
+        }
+
+        return ans;
+    }
+};
